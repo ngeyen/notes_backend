@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-2ga-cwrimk&dxnyj!u=pcx9t0!a-d7^9k$jsh0b&n6f+rhmft&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'http://localhost:3000',]
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = ['http://localhost',
+                         'http://localhost:3000', 'http://127.0.0.1',]
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1',]
 
 # Application definition
 
@@ -38,16 +41,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'notes',
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    "corsheaders.middleware.CorsMiddleware",
+    'django.middleware.common.CommonMiddleware',
+
 ]
 
 ROOT_URLCONF = 'mynotes.urls'
